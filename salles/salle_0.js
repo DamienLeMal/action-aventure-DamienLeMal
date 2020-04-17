@@ -8,74 +8,80 @@ class salle_0 extends Phaser.Scene {
 	}
 
 	preload() {
-		this.load.image('back','assets/violet.jpg');
-		this.load.image('fore','assets/blue.jpg');
+		this.load.image('salle0','assets/png/salles/spr_salle0.png');
+		this.load.image('char','assets/png/spr_player_placeholder.png');
+		this.load.image('circle','assets/png/spr_sphere_placeholder.png');
+		this.load.image('box','assets/png/spr_transparent.png');
 	}
 
 	create() {
-		//this.add.image(100,100,'back').setOrigin(0,0).setScale(1.31,0.98);
-		this.add.image(1000, 1000,'fore').setOrigin(0,0).setScale(4,4);
-		//camera.setViewport
+		//Environnement
+		this.background = this.physics.add.sprite(0,0,'salle0').setScale(3.96,3.9).setOrigin(0,0);
+		this.door1 = this.physics.add.sprite(85,300,'box').setScale(0.1,0.1).setOrigin(0,0);
+		this.door2 = this.physics.add.sprite(400,45,'box').setScale(0.1,0.1).setOrigin(0,0);
+		this.door3 = this.physics.add.sprite(715,300,'box').setScale(0.1,0.1).setOrigin(0,0);
+
+		this.walls = this.physics.add.staticGroup();
+		this.walls.create(0,0,'box').setOrigin(0,0).setScale(5.25,37.5).refreshBody();
+		this.walls.create(720,0,'box').setOrigin(0,0).setScale(5.25,37.5).refreshBody();
+		this.walls.create(0,0,'box').setOrigin(0,0).setScale(50,2.5).refreshBody();
+        this.walls.create(0,500,'box').setOrigin(0,0).setScale(50,6.2).refreshBody();
+
+		//Player
+		sphere = this.physics.add.sprite(600,450,'circle').setScale(4,4).setCircle(28);
+		sphere.alpha = 0;
+		this.box = this.physics.add.sprite(600,450,'boxe').setOrigin(4,0.5);
+		this.player = this.physics.add.sprite(600,450,'char').setScale(4,4);
+
+		//debug
 		this.text = this.add.text(10, 30, '', { font: '16px Courier', fill: '#ffffff' });
-		this.player = this.physics.add.sprite(600,450,'back').setScale(0.5,0.5);
 		this.debugOn = 1;
+
+		//colliders & functions
+		this.physics.add.collider(this.player,this.walls);
+		this.physics.add.overlap(this.player,this.door1,porte1,null,this);
+        this.physics.add.overlap(this.player,this.door2,porte2,null,this);
+        this.physics.add.overlap(this.player,this.door3,porte3,null,this);
+
+		function porte1 (player,door){
+			this.scene.start("salle10");
+		}
+        function porte2 (player,door){
+            this.scene.start("salle7");
+        }
+        function porte3 (player,door){
+            this.scene.start("salle1");
+        }
 	}
 
 	update() {
-		
-    this.debug = [];
-    this.pads = navigator.getGamepads();
-
-    for (this.i = 0; this.i < this.pads.length; this.i++)
-    {
-        this.pad = this.pads[this.i];
-
-        if (!this.pad)
-        {
-            continue;
+		//Hero start position
+        switch (lastRoom) {
+            case -1 :
+                this.player.x = 400;//400
+                this.player.y = 300;//300
+                break;
+            case 10 :
+                this.player.x = 120;
+                this.player.y = 300;
+                break;
+            case 7 :
+                this.player.x = 400;
+                this.player.y = 90;
+                break;
+            case 1 :
+                this.player.x = 680;
+                this.player.y = 300;
+                break;
         }
+        lastRoom = 0;
 
-        	//  Timestamp, index. ID
-        if (this.debugOn == 1) { 
-        	this.debug.push(this.pad.id);
-        	this.debug.push('Index: ' + this.pad.index + ' Timestamp: ' + this.pad.timestamp);
-        }
-        	//  Buttons
+        pad(this.player, this.box);
 
-        this.buttons = '';
-
-        for (this.b = 0; this.b < this.pad.buttons.length; this.b++)
-        {
-            this.button = this.pad.buttons[this.b];
-            controller(this.player,0,this.b,this.button.value);
-
-            //console
-            if (this.debugOn == 1) { 
-            	this.buttons = this.buttons.concat('B' + this.b + ': ' + this.button.value + '  \n');
-            	if (this.b === 16)
-            	{
-            	    this.debug.push(this.buttons);
-            	    this.buttons = '';
-            	}
-            }
-        }
-        
-        //this.debug.push(this.buttons);
-
-        	//  Axis
-
-        this.axes = '';
-
-        for (this.a = 0; this.a < this.pad.axes.length; this.a++) {
-            this.axis = this.pad.axes[this.a];
-           	controller(this.player,this.a,0,this.axis);
-           	if (this.debugOn == 1) { 
-           		this.axes = this.axes.concat('A' + this.a + ': ' + this.axis + '  \n');
-        	    this.debug.push(this.axes);
-        	    this.axes = '';
-        	}
-        }
-    }
-    this.text.setText(this.debug);
+        //Stuff
+    	sphere.x = this.player.x;
+    	sphere.y = this.player.y;
+    	this.box.x = this.player.x;
+    	this.box.y = this.player.y;
 	}
 }

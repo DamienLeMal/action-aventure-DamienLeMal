@@ -33,7 +33,7 @@ function pad(player, box, up, down, side, idle) {
         stick_y1 = axis1;
         stick_x = axis2;
         stick_y = axis3;
-        if (atk != 1) {
+        if ((atk != 1) && (take_hit != 1)) {
             player.setVelocity(axis0 * 200,axis1 * 200);
             if (axis0 < -0.2) {
                 if ((axis1 > -0.2) && (axis1 < 0.2)) {
@@ -100,7 +100,9 @@ function controller (player, a, b, value) {
         switch (b) {
             case 0 :
                 if (value != 0) {
-                    pv += 1;
+                    buttonPressed = 20;
+                }else if (buttonPressed == 20) {
+                    buttonPressed = 0;
                 }
                 break;
             case 1 :
@@ -155,7 +157,9 @@ function controller (player, a, b, value) {
                 break;
             case 9 :
                 if (value != 0) {
-                    player.setTint(0x0f0f0f);
+                    buttonPressed = 9;
+                }else if (buttonPressed == 9) {
+                    buttonPressed = 0;
                 }
                 break;
         }
@@ -270,39 +274,57 @@ function rune (r1, r2, r3, r4, r5, r6, r7, r8, rs, val, player) {
 }
 function heartPick (player, coeur){
     coeur.disableBody(true,true);
+    this.sound.play('key_pickup');
     pv += 2;
     if (pv > pv_max) {
         pv = pv_max;
     }
 }
+function keyPick (player, cle){
+    cle.disableBody(true,true);
+    this.sound.play('key_pickup');
+    key += 1;
+}
 function jera (sphere, bloc) {
     if ((buttonPressed == 5) && (compSelect == 2) && (hold == 0)) {
+        this.sound.play('telekinesis');
         bloc.setAlpha(0).setPosition(-100,-100);
         blocGrab = bloc;
         box.setTexture('bloc');
         hold = 1;
     }
 }
-function throwBloc (player, bloc) {
+function throwBloc (player, bloc, cela) {
     if ((hold == 1) && (buttonPressed != 5)){
         hold = 0;
         box.setTexture('box');
         bloc.setAlpha(1).setPosition(stick_x*100 + player.x, stick_y*100 + player.y).setVelocity((bloc.x - player.x)*15, (bloc.y - player.y)*15);
+        cela.sound.play('throw');
         bloc.rotation = rotation;
         minSpeed(bloc);
         jet = 1;
     }
 }
 function minSpeed (bloc) {
-    if (bloc.body.velocityX < 100) {
-        bloc.setVelocityX(100);
+    if ((bloc.body.velocity.x < 800) && (bloc.body.velocity.x > 0)) {
+        bloc.setVelocityX(800);
+    }
+    if ((bloc.body.velocity.x > -800) && (bloc.body.velocity.x < 0)) {
+        bloc.setVelocityX(-800);
+    }
+    if ((bloc.body.velocity.y < 800) && (bloc.body.velocity.y > 0)) {
+        bloc.setVelocityY(800);
+    }
+    if ((bloc.body.velocity.y > -800) && (bloc.body.velocity.y < 0)) {
+        bloc.setVelocityY(-800);
     }
 }
-function doorOpen (door, lock) {
+function doorOpen (door, lock, cela) {
     if (lock == 0) {
         door.setAlpha(0);
         return 0;
     }else if (door.anims.getCurrentKey() === 'sesame') {
+        cela.sound.play('open_door', {volume: 0.1});
         if (door.anims.currentFrame.index === 4) {
             door.disableBody(true,true);
             return 0;
@@ -311,9 +333,7 @@ function doorOpen (door, lock) {
         return 1;
     }
 }
-function teiwaz (player, atk_up, atk_down, atk_side, hit) {
-
-     
+function teiwaz (player, atk_up, atk_down, atk_side, hit, cela) {
     if ((buttonPressed == 5) && (compSelect == 1) && (atk == 0)) {
         player.setVelocity(0,0);
         atk = 1;
@@ -344,6 +364,7 @@ function teiwaz (player, atk_up, atk_down, atk_side, hit) {
             case 3 : hitBox = hit.create(player.x - 30,player.y,'box').setScale(2,4).setOrigin(0.5,0.3).refreshBody(); break;
             case 4 : hitBox = hit.create(player.x + 30,player.y,'box').setScale(2,4).setOrigin(0.5,0.3).refreshBody(); break;
         }
+        cela.sound.play('sword');
     }
 }
 function endAtk (player, scene, idle) {
@@ -352,10 +373,161 @@ function endAtk (player, scene, idle) {
         scene.time.addEvent({ delay: 100, callback: ()=>{ 
             if ((player.anims.getCurrentKey() == 'atk_down') || (player.anims.getCurrentKey() == 'atk_up') || (player.anims.getCurrentKey() == 'atk_side')) {
                 anim(player, idle);
-                player.setOrigin(0.5,0.5).setOffset(2, 13);
-                hitBox.disableBody(true, true)
+                player.setOrigin(0.5,0.5).setOffset(2, 13);   
             }
+            hitBox.disableBody(true, true);
         }, loop: false});
         scene.time.addEvent({ delay: 1000, callback: ()=>{ atk = 0; }, loop: false});
     }
+}
+function enemyBrain (enemy, scene, fireball, player) {
+    var rand;
+    time1 = scene.time.addEvent({ delay: 1000, callback: ()=>{
+        rand = Phaser.Math.RND.between(1,5);
+        switch (rand) {
+            case 1 : enemy.setVelocity(100,0).setAlpha(1); break;
+            case 2 : enemy.setVelocity(-100,0).setAlpha(1); break;
+            case 3 : enemy.setVelocity(0,100).setAlpha(1); break;
+            case 4 : enemy.setVelocity(0,-100).setAlpha(1); break;
+            case 5 :
+                if (enemy.anims.getCurrentKey() == 'ennemis2') {
+                    enemy.setVelocity(0,0).setAlpha(0.9);
+                }
+        }
+    }, loop: true});
+}
+function enemySprite (enemy, walk, fire, fireboule, player) {
+    if (enemy.body.velocity.x == 100) {
+        enemy.setAngle(90);
+    }
+    if (enemy.body.velocity.x == -100) {
+        enemy.setAngle(-90);
+    }
+    if (enemy.body.velocity.y == 100) {
+        enemy.setAngle(180);
+    }
+    if (enemy.body.velocity.y == -100) {
+        enemy.setAngle(0);
+    }
+    if (enemy.alpha == 1) {
+        anim(enemy, walk);
+    }else{
+        anim(enemy, fire);
+        if (enemy.anims.currentFrame.index === 1) {
+            once = 0;
+        }
+        if ((enemy.anims.currentFrame.index === 3) && (once != 1)) {
+            fireboule.create(enemy.x, enemy.y, 'enemy_fire').setScale(3.96,3.9).setVelocity((player.x - enemy.x)/2, (player.y - enemy.y)/2);
+            once = 1;
+        }  
+    }
+}
+function casse (enemy, hit) {
+    var nb;
+    hit.disableBody(true,true);
+    enemy.disableBody(true,true);
+    nb = Phaser.Math.RND.between(0,10);
+    if (nb == 5) {
+        this.heart.create(enemy.x,enemy.y,'coeurI').setScale(3.96,3.9).refreshBody();
+    }
+}
+function tue (enemy, hit) {
+    var nb;
+    hit.disableBody(true,true);
+    enemy.disableBody(true,true);
+    nb = Phaser.Math.RND.between(0,10);
+    if (nb == 5) {
+        this.heart.create(enemy.x,enemy.y,'coeurI').setScale(3.96,3.9).refreshBody();
+    }
+    count += 1;
+    this.sound.play('monster_hit');
+}
+function collBloc (player, bloc){
+    bloc.setVelocity(0,0);
+}
+function collBlocWall (bloc, wall){
+    if (jet == 1) {
+        bloc.setVelocity(0,0);
+        if (bloc.anims.getCurrentKey() != 'explosion') {
+            bloc.anims.play('explosion',false).setSize(20,20).setOffset(6, 6);
+            this.sound.play('explosion');
+        }
+        if (bloc.anims.currentFrame.index === 5) {
+            bloc.disableBody(true,true);
+            bloc.destroy();
+            jet = 0;
+        }
+    }
+}
+function collBlocEnemy (bloc, enemy){
+    var nb;
+    if (jet == 1) {
+        bloc.setVelocity(0,0);
+        if (bloc.anims.getCurrentKey() != 'explosion') {
+            bloc.anims.play('explosion',false).setSize(20,20).setOffset(6, 6);
+            this.sound.play('explosion');
+            enemy.setVelocity(0,0).setImmovable(true).setAlpha(0);
+            nb = Phaser.Math.RND.between(0,10);
+            if (nb == 5) {
+                this.heart.create(enemy.x,enemy.y,'coeurI').setScale(3.96,3.9).refreshBody();
+            }
+        }
+        if (bloc.anims.currentFrame.index === 5) {
+            bloc.disableBody(true,true);
+            enemy.disableBody(true,true);
+            jet = 0;
+        }
+    }
+}
+function getReckt (player, enemy) {
+    enemy.setVelocity((player.x - enemy.x)*-5, (player.y - enemy.y)*-5);
+    player.setVelocity((player.x - enemy.x)*5, (player.y - enemy.y)*5);
+    take_hit = 1;
+    pv -= 1;
+    this.sound.play('player_hit');
+    mechant = enemy;
+}
+function resetReckt (scene, player, enemy) {
+    if (take_hit == 1) {
+        scene.time.addEvent({ delay: 100, callback: ()=>{ 
+            take_hit = 0;
+            player.setVelocity(0, 0);
+            enemy.setVelocity(0, 0);
+        }, loop: false});
+    }
+}
+function deathScreen (black, player, ghost, death, cela) {
+    if (pv <= 0) {
+        player.disableBody(true, true);
+        if (black.alpha < 1) {
+            black.alpha += 0.01;
+        }
+        ghost.setPosition(player.x, player.y);
+        anim(ghost, death)
+        if (ghost.anims.currentFrame.index === 5) {
+            cela.anims.pauseAll();
+        }
+    }
+}
+function ballHit (player, ball) {
+    ball.disableBody(true, true);
+    pv -= 1;
+    player.setVelocity((player.x - ball.x)*5, (player.y - ball.y)*5);
+    this.sound.play('player_hit');
+    take_hit = 1;
+    mechant = ball;
+}
+function halo () {
+    if ((buttonPressed == 5) && (compSelect == 2) && (hold == 0)) {
+        anim(sphere, sphereAnim);
+        sphere.setAlpha(1);
+    }else{
+        sphere.setAlpha(0);
+    }
+}
+function updateText (t) {
+    t.setText("x " + key);
+}
+function ballColl (ball, other) {
+    ball.destroy();
 }

@@ -57,15 +57,15 @@ class salle_7 extends Phaser.Scene {
         //HUD
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
-            this.add.image(this.hud_x,25,'coeurE').setScale(4,4).setOrigin(0,0);
+            this.add.image(this.hud_x,25,'coeurE').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
             this.hud_x += 35;
         }
-        this.h1 = this.add.image(25,25,'coeurH').setScale(4,4).setOrigin(0,0);
-        this.f1 = this.add.image(25,25,'coeurF').setScale(4,4).setOrigin(0,0);
-        this.h2 = this.add.image(60,25,'coeurH').setScale(4,4).setOrigin(0,0);
-        this.f2 = this.add.image(60,25,'coeurF').setScale(4,4).setOrigin(0,0);
-        this.h3 = this.add.image(95,25,'coeurH').setScale(4,4).setOrigin(0,0);
-        this.f3 = this.add.image(95,25,'coeurF').setScale(4,4).setOrigin(0,0);
+        this.h1 = this.add.image(25,25,'coeurH').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
+        this.f1 = this.add.image(25,25,'coeurF').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
+        this.h2 = this.add.image(60,25,'coeurH').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
+        this.f2 = this.add.image(60,25,'coeurF').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
+        this.h3 = this.add.image(95,25,'coeurH').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
+        this.f3 = this.add.image(95,25,'coeurF').setScale(4,4).setOrigin(0,0).setScrollFactor(0);
 
 		this.physics.add.collider(this.player,this.walls);
 		this.physics.add.overlap(this.player,this.door1,porte1,null,this);

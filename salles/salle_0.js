@@ -3,10 +3,6 @@ class salle_0 extends Phaser.Scene {
 		super("salle0");
 	}
 
-	init(data) {
-
-	}
-
 	preload() {
 		this.load.image('salle0','assets/png/salles/spr_salle0.png');
         this.load.image('salle1','assets/png/salles/spr_salle1.png');
@@ -35,6 +31,10 @@ class salle_0 extends Phaser.Scene {
         this.load.image('bloc_push','assets/png/item/spr_bloc_push.png');
         this.load.image('door_closed','assets/png/item/spr_door_closed.png');
         this.load.image('door_locked','assets/png/item/spr_door_locked.png');
+        this.load.image('enemy_fire','assets/png/enemies/spr_enemy_fire.png');
+        this.load.image('key','assets/png/item/spr_key.png');
+        this.load.image('pot','assets/png/item/spr_pot.png');
+        this.load.image('coffre','assets/png/item/spr_chest_normal.png');
         this.load.spritesheet('door_opening','assets/png/item/spr_door_opening.png',{frameWidth: 33, frameHeight: 18});
         this.load.spritesheet('bloc_explosion','assets/png/item/spr_bloc_explosion.png',{frameWidth: 30, frameHeight: 30});
         this.load.spritesheet('player_idle','assets/png/player/spr_player_idle.png',{frameWidth: 15, frameHeight: 20});
@@ -44,7 +44,22 @@ class salle_0 extends Phaser.Scene {
         this.load.spritesheet('player_attaque_up','assets/png/player/spr_player_attaque_up.png',{frameWidth: 27, frameHeight: 26});
         this.load.spritesheet('player_attaque_down','assets/png/player/spr_player_attaque_down.png',{frameWidth: 27, frameHeight: 26});
         this.load.spritesheet('player_attaque_side','assets/png/player/spr_player_attaque_side.png',{frameWidth: 27, frameHeight: 26});
-        this.load.audio('jeramp3','assets/telekinesis.wav');
+        this.load.spritesheet('player_dies','assets/png/player/spr_player_death.png',{frameWidth: 20, frameHeight: 19});
+        this.load.spritesheet('enemy_turtle','assets/png/enemies/spr_enemy_tortue.png',{frameWidth: 15, frameHeight: 14});
+        this.load.spritesheet('enemy_2','assets/png/enemies/spr_enemy_2_move.png',{frameWidth: 21, frameHeight: 17});
+        this.load.spritesheet('enemy_2_fire','assets/png/enemies/spr_enemy_2_fire.png',{frameWidth: 21, frameHeight: 18});
+        this.load.spritesheet('halo','assets/png/item/spr_jera_halo.png',{frameWidth: 55, frameHeight: 55});
+        this.load.audio('boss_dies','assets/wav/boss_dies.wav');
+        this.load.audio('boss_hit','assets/wav/boss_hit.wav');
+        this.load.audio('open_door','assets/wav/open_door.wav');/////////////////////////////
+        this.load.audio('explosion','assets/wav/explosion.wav');/////////////////////////////
+        this.load.audio('key_pickup','assets/wav/key_pickup.wav');/////////////
+        this.load.audio('monster_hit','assets/wav/monster_hit.wav');/////////////////////////
+        this.load.audio('player_hit','assets/wav/player_hit.wav');///////////////////////////
+        this.load.audio('rune_pickup','assets/wav/rune_pickup.wav');
+        this.load.audio('sword','assets/wav/sword.wav');/////////////////////////////////////
+        this.load.audio('telekinesis','assets/wav/telekinesis.wav');/////////////////////////
+        this.load.audio('throw','assets/wav/throw.wav');/////////////////////////////////////
 	}
 
 	create() {
@@ -67,23 +82,35 @@ class salle_0 extends Phaser.Scene {
         this.walls.create(0,500,'box').setOrigin(0,0).setScale(50,6.2).refreshBody();
 
         this.bloc = this.physics.add.group();
-        this.bloc.create(350, 400, 'bloc').setScale(3.96,3.9);
-        this.bloc.create(500, 400, 'bloc').setScale(3.96,3.9);
+        this.bloc.create(350, 400, 'bloc').setScale(3.96,3.9).setImmovable(true);
+        this.bloc.create(500, 400, 'bloc').setScale(3.96,3.9).setImmovable(true);
 
         this.blocP = this.physics.add.staticGroup();
-        this.blocP.create(300, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,0).setOffset(-22);
-        this.blocP.create(400, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,0).setOffset(-22);
+        this.blocP.create(300, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
+        this.blocP.create(400, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
 
         this.pot = this.physics.add.group();
-        this.pot.create(200,300,'box').setScale(3,3);
+        this.pot.create(200,300,'pot').setScale(3,3).setImmovable(true);
 
         this.heart = this.physics.add.staticGroup();
-        this.heart.create(250,250,'coeurI').setOrigin(0,0).setScale(3.96,3.9).refreshBody();
+        //this.heart.create(250,250,'coeurI').setOrigin(0,0).setScale(3.96,3.9).refreshBody();
+
+        this.tortue = this.physics.add.group();
+        this.tortue1 = this.tortue.create(100, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+        this.tortue2 = this.tortue.create(200, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+
+        this.enemy2 = this.physics.add.group();
+        this.enemy2_1 = this.enemy2.create(300, 400, 'enemy_2').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+        this.enemy2_2 = this.enemy2.create(300, 200, 'enemy_2').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+
+        this.fireBall = this.physics.add.group();
+        this.fireBall.create(300, 200, 'enemy_fire').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+
 //Player
 		sphere = this.physics.add.sprite(600,450,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
 		box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
-        this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6,false).setOffset(2, 13).setOrigin(0.5,0.5);
+        this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
 //HUD
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -96,8 +123,8 @@ class salle_0 extends Phaser.Scene {
         this.f2 = this.add.image(60,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
         this.h3 = this.add.image(95,25,'coeurH').setScale(3.96,3.9).setOrigin(0,0);
         this.f3 = this.add.image(95,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
-
-        this.t = this.add.text(200,200,'coeurF');
+        this.c = this.add.image(150,15,'key').setScale(2.96,2.9).setOrigin(0,0);
+        this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
         this.runeHud2 = this.add.image(this.player.x + 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
@@ -108,6 +135,9 @@ class salle_0 extends Phaser.Scene {
         this.runeHud7 = this.add.image(this.player.x - 100, this.player.y, 'runeBox').setScale(3.96,3.9);
         this.runeHud8 = this.add.image(this.player.x - 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
+
+        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
+        this.playerGhost = this.physics.add.sprite(600,450,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 //Animations
         this.idle = this.anims.create({
             key:'idle',
@@ -163,27 +193,73 @@ class salle_0 extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-//sound
-        this.soundTest = this.sound.add('jeramp3');
+        this.turtle = this.anims.create({
+            key:'turtle',
+            frames: this.anims.generateFrameNumbers('enemy_turtle', {start: 0, end: 1}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.ennemis2 = this.anims.create({
+            key:'ennemis2',
+            frames: this.anims.generateFrameNumbers('enemy_2', {start: 0, end: 1}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.enemyFire = this.anims.create({
+            key:'enemyFire',
+            frames: this.anims.generateFrameNumbers('enemy_2_fire', {start: 0, end: 2}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.ded = this.anims.create({
+            key:'ded',
+            frames: this.anims.generateFrameNumbers('player_dies', {start: 0, end: 5}),
+            frameRate: 4,
+            repeat: 1
+        });
+        this.halo = this.anims.create({
+            key:'halo',
+            frames: this.anims.generateFrameNumbers('halo', {start: 0, end: 5}),
+            frameRate: 10,
+            repeat: 1
+        });
 //colliders & functions
-		this.physics.add.collider(this.player,this.walls);
-        this.physics.add.collider(this.player,this.blocP);
-        this.physics.add.collider(this.player,this.bloc,collBloc,null,this);
-        this.physics.add.collider(this.bloc, this.walls,collBlocWall,null,this);
-        this.physics.add.collider(this.bloc, this.blocP,collBlocWall,null,this);
-		this.physics.add.overlap(this.player,this.door1,porte1,null,this);
-        this.physics.add.overlap(this.player,this.door2,porte2,null,this);
-        this.physics.add.overlap(this.player,this.door3,porte3,null,this);
-        this.physics.add.overlap(sphere,this.bloc,jera,null,this);
-        this.physics.add.overlap(this.player,this.heart,heartPick,null,this);
-        this.physics.add.overlap(this.pot,this.teiwaz,cassePot,null,this);
+        this.physics.add.collider(this.pot, this.tortue);
+        this.physics.add.collider(this.pot, this.enemy2);
+        this.physics.add.collider(this.pot, this.player);
+        this.physics.add.collider(this.tortue, this.walls);
+        this.physics.add.collider(this.tortue, this.blocP);
+        this.physics.add.collider(this.tortue, this.tortue);
+        this.physics.add.collider(this.enemy2, this.walls);
+        this.physics.add.collider(this.enemy2, this.blocP);
+        this.physics.add.collider(this.enemy2, this.tortue);
+        this.physics.add.collider(this.enemy2, this.enemy2);
+		this.physics.add.collider(this.player, this.walls);
+        this.physics.add.collider(this.player, this.blocP);
+        this.physics.add.collider(this.fireBall, this.pot, ballColl, null, this);
+        this.physics.add.collider(this.fireBall, this.bloc, ballColl, null, this);
+        this.physics.add.collider(this.fireBall, this.blocP, ballColl, null, this);
+        this.physics.add.collider(this.player, this.tortue, getReckt, null, this);
+        this.physics.add.collider(this.player, this.enemy2, getReckt, null, this);
+        this.physics.add.collider(this.player, this.bloc, collBloc, null, this);
+        this.physics.add.collider(this.bloc, this.tortue, collBlocEnemy, null, this);
+        this.physics.add.collider(this.bloc, this.enemy2, collBlocEnemy, null, this);
+        this.physics.add.collider(this.bloc, this.walls, collBlocWall, null, this);
+        this.physics.add.collider(this.bloc, this.blocP, collBlocWall, null, this);
+		this.physics.add.overlap(this.player, this.door1, porte1, null, this);
+        this.physics.add.overlap(this.player, this.door2, porte2, null, this);
+        this.physics.add.overlap(this.player, this.door3, porte3, null, this);
+        this.physics.add.overlap(sphere, this.bloc, jera, null, this);
+        this.physics.add.overlap(this.player, this.fireBall, ballHit, null, this);
+        this.physics.add.overlap(this.player, this.heart, heartPick, null, this);
+        this.physics.add.overlap(this.pot, this.teiwaz, casse, null, this);
+        this.physics.add.overlap(this.tortue, this.teiwaz, tue, null, this);
+        this.physics.add.overlap(this.enemy2, this.teiwaz, tue, null, this);
 
-        function cassePot (pot, hit) {
-            console.log('yes');
-            hit.disableBody(true,true);
-            pot.disableBody(true,true);
-            this.heart.create(pot.x,pot.y,'coeurI').setOrigin(0,0).setScale(3.96,3.9).refreshBody();
-        }
+        enemyBrain(this.tortue1, this);
+        enemyBrain(this.tortue2, this);
+        enemyBrain(this.enemy2_1, this, this.fireBall, this.player);
+        enemyBrain(this.enemy2_2, this, this.fireBall, this.player);
 		function porte1 (player, door){
 			this.scene.start("salle10");
 		}
@@ -202,30 +278,24 @@ class salle_0 extends Phaser.Scene {
                 this.scene.start("salle1");
             }
         }
-        function collBloc (player, bloc){
-            this.doors3.anims.play('sesame',false);
-            this.doors2.anims.play('sesame',false);
-            bloc.setVelocity(0,0);
-        }
-        function collBlocWall (bloc, wall){
-            if (jet == 1) {
-                bloc.setVelocity(0,0);
-                if (bloc.anims.getCurrentKey() != 'explosion') {
-                    bloc.anims.play('explosion',false).setSize(20,20).setOffset(6, 6);
-                }
-                if (bloc.anims.currentFrame.index === 5) {
-                    bloc.disableBody(true,true);
-                    jet = 0;
-                }
-            }
-        }
     }
 
 	update() {
 
-        lock2 = doorOpen(this.doors2_l,lock2);
-        this.checkClosedDoors = doorOpen(this.doors2,this.checkClosedDoors);
-        this.checkClosedDoors = doorOpen(this.doors3,this.checkClosedDoors);
+
+
+if (buttonPressed === 9) {
+    this.scene.start("salle3");
+}
+
+
+
+
+
+
+        lock2 = doorOpen(this.doors2_l,lock2, this);
+        this.checkClosedDoors = doorOpen(this.doors2,this.checkClosedDoors, this);
+        this.checkClosedDoors = doorOpen(this.doors3,this.checkClosedDoors, this);
 
 		//Hero start position
         switch (lastRoom) {
@@ -252,28 +322,32 @@ class salle_0 extends Phaser.Scene {
 
 
 
-//test (un et deux n'existent qu'ici)
-        this.un = buttonPressed;
-        if (this.deux != this.un){
-            this.soundTest.play();
-        }
-        this.deux = this.un;
-
-
-
         this.u = pad(this.player, box, this.up, this.down, this.side, this.idle);
         if (buttonPressed == 4) {
             this.physics.world.timeScale = 6;
+
+            this.doors3.anims.play('sesame',false);
+            this.doors2.anims.play('sesame',false);
         }else{
             this.physics.world.timeScale = 1;
         }
         heart(this.h1,this.f1,this.h2,this.f2,this.h3,this.f3);
         rune(this.runeHud1, this.runeHud2, this.runeHud3, this.runeHud4, this.runeHud5, this.runeHud6, this.runeHud7, this.runeHud8, this.runeSelect, this.u, this.player);
-        throwBloc(this.player, blocGrab);
-        teiwaz(this.player, this.atk_up, this.atk_down, this.atk_side, this.teiwaz);
+        throwBloc(this.player, blocGrab, this);
+        teiwaz(this.player, this.atk_up, this.atk_down, this.atk_side, this.teiwaz, this);
         endAtk(this.player, this, this.idle);
-    	sphere.x = this.player.x;
-    	sphere.y = this.player.y;
+        enemySprite(this.tortue1, this.turtle);
+        enemySprite(this.tortue2, this.turtle);
+        enemySprite(this.enemy2_1, this.ennemis2, this.enemyFire, this.fireBall, this.player);
+        enemySprite(this.enemy2_2, this.ennemis2, this.enemyFire, this.fireBall, this.player);
+        resetReckt(this, this.player, mechant);
+        deathScreen(this.blackScreen, this.player, this.playerGhost, this.ded, this);
+        halo(this);
+        updateText(this.ct);
+        fireBoule = this.fireball;
+
+        sphereAnim = this.halo;
+    	sphere.setPosition(this.player.x, this.player.y);
         if (hold == 1) {
     	   box.x = this.player.x;
     	   box.y = this.player.y;

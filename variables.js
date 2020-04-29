@@ -7,8 +7,10 @@ var jet = 0;
 var pv = 3;
 var pv_max = 6;
 var lastRoom = -1;
+var telep = 0;
 var buttonPressed;
 var compSelect = 1;
+var compHilight = 1;
 var blocGrab;
 var atk = 0;
 var take_hit;
@@ -19,11 +21,15 @@ var stick_y;
 var hitBox;
 var mechant;
 var fireBoule;
-var once;
+var once1;
+var once2;
+var once3;
 var un;
 var count = 0;
+var jeraUnlock = 1;
 //doors
 var key = 0;
+var bossKey = 0;
 var lock1 = 1;
 var lock2 = 1;
 var lock3 = 1;
@@ -35,4 +41,13 @@ var lock8 = 1;
 var lock9 = 1;
 //drop par salles
 var room1 = 0;
+var room3 = 0;
+var room4 = 0;
+var room5 = 0;
+var room7_1 = 0;//clé
+var room7_2 = 0;//coffre
+var room8_1 = 0;
+var room8_2 = 0;
 var room10 = 0;
+var room12 = 0;
+var room13 = 0;

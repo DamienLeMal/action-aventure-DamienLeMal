@@ -1,0 +1,776 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sphere",
+				"sphereAnim"
+			],
+			[
+				"s",
+				"setVelocityY"
+			],
+			[
+				"sey",
+				"setVelocityX"
+			],
+			[
+				"enemy_",
+				"enemy2_1"
+			],
+			[
+				"setVe",
+				"setVelocity"
+			],
+			[
+				"ennem",
+				"ennemy_turtle"
+			],
+			[
+				"hit",
+				"hitBox"
+			],
+			[
+				"stick",
+				"stick_y1"
+			],
+			[
+				"at",
+				"atk_side"
+			],
+			[
+				"sound",
+				"soundTest"
+			],
+			[
+				"jera",
+				"jeramp3"
+			],
+			[
+				"soun",
+				"soundTest"
+			],
+			[
+				"ele",
+				"elec_cirlce"
+			],
+			[
+				"tea",
+				"spr_teiwaz_arc"
+			],
+			[
+				"teiwa",
+				"teiwaz_arc"
+			],
+			[
+				"teiwaz",
+				"teiwaz_circle"
+			],
+			[
+				"wallsB",
+				"wallsBloc_down"
+			],
+			[
+				"set",
+				"setVelocity"
+			],
+			[
+				"st",
+				"stick_x"
+			],
+			[
+				"button",
+				"buttonPressed"
+			],
+			[
+				"time",
+				"timeScale"
+			],
+			[
+				"deb",
+				"debugOn"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"follo",
+				"followX"
+			],
+			[
+				"fra",
+				"frameWidth"
+			],
+			[
+				"gho",
+				"ghost2"
+			],
+			[
+				"ghos",
+				"ghost1"
+			],
+			[
+				"ghost",
+				"ghost1"
+			],
+			[
+				"score",
+				"score_j"
+			],
+			[
+				"shiel",
+				"shieldUse"
+			],
+			[
+				"menu",
+				"menuShop"
+			],
+			[
+				"print",
+				"printMenu"
+			],
+			[
+				"milie",
+				"milieu"
+			],
+			[
+				"setVel",
+				"setVelocityX"
+			],
+			[
+				"enne",
+				"ennemis"
+			],
+			[
+				"enn",
+				"ennemis"
+			],
+			[
+				"max",
+				"maxEnergy"
+			],
+			[
+				"nrj",
+				"nrjGain"
+			],
+			[
+				"choix",
+				"choix2"
+			],
+			[
+				"arme",
+				"armes"
+			],
+			[
+				"random",
+				"random_nbr"
+			],
+			[
+				"nbr",
+				"nbr_fire"
+			],
+			[
+				"cre",
+				"createBomb"
+			],
+			[
+				"pv_",
+				"pv_red"
+			],
+			[
+				"saut",
+				"saut2"
+			],
+			[
+				"sau",
+				"Saut2"
+			],
+			[
+				"e",
+				"energy"
+			],
+			[
+				"disp",
+				"display"
+			],
+			[
+				"displa",
+				"displayAtlanta"
+			],
+			[
+				"hull",
+				"maxHull"
+			],
+			[
+				"sys",
+				"system"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"wea",
+				"weapon1"
+			],
+			[
+				"prn",
+				"print"
+			],
+			[
+				"text",
+				"textOn"
+			],
+			[
+				"te",
+				"textOn"
+			],
+			[
+				"ke",
+				"keyCode"
+			],
+			[
+				"clea",
+				"clear_minigame"
+			],
+			[
+				"clear",
+				"clearInterval"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"elem",
+				"element2"
+			],
+			[
+				"Print",
+				"printf"
+			],
+			[
+				"curren",
+				"currentEtape"
+			],
+			[
+				"milieu",
+				"milieuPrint"
+			],
+			[
+				"na",
+				"name"
+			],
+			[
+				"tes",
+				"testLenght"
+			],
+			[
+				"da",
+				"dashNumber"
+			],
+			[
+				"id",
+				"idLenght"
+			],
+			[
+				"di",
+				"digitLenght"
+			],
+			[
+				"nam",
+				"nameLenght"
+			],
+			[
+				"pri",
+				"profit"
+			],
+			[
+				"choi",
+				"choix_shop"
+			],
+			[
+				"qq",
+				"qqte_inventaire"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"hol",
+				"holder_c"
+			],
+			[
+				"str",
+				"strcpy"
+			],
+			[
+				"her",
+				"hero"
+			],
+			[
+				"monstre",
+				"monstre_mp"
+			],
+			[
+				"test",
+				"test_m"
+			],
+			[
+				"cumu",
+				"cumul_m"
+			],
+			[
+				"end",
+				"end_m"
+			],
+			[
+				"mosntr",
+				"monstre2"
+			],
+			[
+				"go",
+				"gobelin"
+			],
+			[
+				"Sert",
+				"Serpent"
+			],
+			[
+				"hero",
+				"hero_designated"
+			],
+			[
+				"mos",
+				"monster1"
+			],
+			[
+				"choose",
+				"choose_m"
+			],
+			[
+				"choos",
+				"choose_m"
+			],
+			[
+				"choo",
+				"choose_m"
+			],
+			[
+				"ran",
+				"random_nbr"
+			],
+			[
+				"sor",
+				"sorcier"
+			],
+			[
+				"el",
+				"elfe_noir"
+			],
+			[
+				"pv",
+				"pv_max"
+			],
+			[
+				"min",
+				"minotaure"
+			],
+			[
+				"mo",
+				"hit_monster"
+			],
+			[
+				"mon",
+				"monster_designated"
+			],
+			[
+				"th",
+				"thirteen"
+			],
+			[
+				"monster",
+				"monster_choosen"
+			],
+			[
+				"bar",
+				"Barbare"
+			],
+			[
+				"barba",
+				"barbare"
+			],
+			[
+				"barbare",
+				"Barbare"
+			],
+			[
+				"archer",
+				"archer_spe2"
+			],
+			[
+				"su",
+				"subNombre"
+			],
+			[
+				"sw",
+				"switchChall"
+			],
+			[
+				"nex",
+				"nextV"
+			],
+			[
+				"div",
+				"divSelect"
+			],
+			[
+				"ne",
+				"nextV"
+			],
+			[
+				"err",
+				"errColumns"
+			],
+			[
+				"compte",
+				"compteur5"
+			],
+			[
+				"nombre",
+				"nombreId"
+			],
+			[
+				"chif",
+				"chiffrestr"
+			],
+			[
+				"chi",
+				"chiffrestr"
+			],
+			[
+				"ces",
+				"caseNumber"
+			],
+			[
+				"ver",
+				"verifRows"
+			],
+			[
+				"verif",
+				"verifColumns"
+			],
+			[
+				"dra",
+				"draw_min"
+			],
+			[
+				"er",
+				"erreur"
+			],
+			[
+				"rem",
+				"removeClass"
+			],
+			[
+				"w",
+				"writePuzzle"
+			],
+			[
+				"font",
+				"font-weight\tproperty"
+			],
+			[
+				"erase",
+				"erasePen"
+			],
+			[
+				"era",
+				"erasePen"
+			],
+			[
+				"sub",
+				"subdHover"
+			],
+			[
+				"fond",
+				"fond_grille"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"nps",
+				"nps"
+			],
+			[
+				"tras",
+				"transform\tproperty"
+			],
+			[
+				"b",
+				"bouton"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 414.0,
+		"history":
+		[
+			"quoi"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_1.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_6.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_3.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_12.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/moba.js",
+		"/C/Users/damie/OneDrive/Documents/B1GDA/Programation/onlineGDB tp tomagochi",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_7.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/TPWeb-040220/monJeu.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_14.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_13.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_11.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_10.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_9.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_8.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_5.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_4.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_2.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/camera/scene0.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/pong.js",
+		"/C/Users/damie/Downloads/Project_Zelda_Like/js/phaser.min.js",
+		"/C/Users/damie/Downloads/Project_Zelda_Like/js/start.js",
+		"/C/Users/damie/Downloads/Project_Zelda_Like/js/World1.js",
+		"/C/Users/damie/Downloads/Project_Zelda_Like/index.html",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/fonctions.js",
+		"/C/Users/damie/Downloads/Scene2.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/pacman.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_0.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/salles/salle_15.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/jeu.js",
+		"/G/GD1 A/C++/projects/helloworld/Perso.cpp",
+		"/G/GD1 A/C++/projects/helloworld/helloworld.cpp",
+		"/G/GD1 A/C++/projects/helloworld/Perso.h",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/main.html",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/transition.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/gameOver.js",
+		"/C/Users/damie/Downloads/History/Scene1.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/action-aventure/jeu.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/style.css",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/scene0.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop-4/camera-master/scene1.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Jeu-Libre-C/graph.c",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Jeu-Libre-C/ascii-demo.txt",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Jeu-Libre-C/jeu.c",
+		"/C/Users/damie/Downloads/shopEntier.c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (6).c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (5).c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (4).c",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Jeu-Libre-C/README.md",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (3).c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault.c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (2).c",
+		"/C/Users/damie/Downloads/FF_Remande_Nicault (1).c",
+		"/C/Users/damie/Downloads/Rezource.c",
+		"/C/Users/damie/OneDrive/Documents/GitHub/TPWeb-040220/README.md",
+		"/C/Users/damie/Downloads/scripts.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop/visualNovel.html",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop/visualNovel.css",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Workshop/visualNovel.js",
+		"/C/Users/damie/OneDrive/Documents/Downloads/script.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/example.js",
+		"/C/Users/damie/OneDrive/Documents/GitHub/Shop-C-/shop.c",
+		"/C/Users/damie/Downloads/fgetstr.c",
+		"/C/Users/damie/OneDrive/Documents/GitHub/TP1/combat.c",
+		"/C/Users/damie/Downloads/jeu_damien.c",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/clicker.js",
+		"/C/Users/damie/Downloads/clicker.js",
+		"/C/Users/damie/Downloads/jeu-5.c",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/clicker.html",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/clicker.css",
+		"/C/Users/damie/AppData/Local/Temp/Rar$DRa884.49636/Cliqueur/clicker.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/backup/clicker.js",
+		"/G/GD1 A/Programmation/C/combat.c",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sudoku.html",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sudoku.css",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sudoku.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/backup/sudoku - grille à un chiffre.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/backup/sudoku - Copie.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/countUp.js-master/index.html",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/odometer.js",
+		"/C/Users/damie/Downloads/odometer-master.zip",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sudoku----.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sudoku--.js",
+		"/G/GD1 A/Programmation/HTML/sudoku/sudoku.css",
+		"/G/GD1 A/Programmation/HTML/sudoku/sudoku.js",
+		"/G/GD1 A/Programmation/HTML/sudoku/sudoku.html",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/Sudoku.html",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/Cliqueur/clicker-1.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/backup/sudoku - Copie1.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/backup/sudoku - Copie3.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/backup/sudoku.js",
+		"/C/Users/damie/OneDrive/Documents/B1 GD A/Programation/sudoku/sodoku.css"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "salle_0.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 152.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

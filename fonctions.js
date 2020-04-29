@@ -231,7 +231,7 @@ function anim (player, anim){
 function rune (r1, r2, r3, r4, r5, r6, r7, r8, rs, val, player) {
     if (buttonPressed == 4) {
         r1.setPosition(player.x, player.y - 100).setAlpha(1).setTexture('teiwaz');
-        r2.setPosition(player.x + 75, player.y - 75).setAlpha(1).setTexture('jera');
+        r2.setPosition(player.x + 75, player.y - 75).setAlpha(1);
         r3.setPosition(player.x + 100, player.y).setAlpha(1);
         r4.setPosition(player.x + 75, player.y + 75).setAlpha(1);
         r5.setPosition(player.x, player.y + 100).setAlpha(1);
@@ -239,18 +239,21 @@ function rune (r1, r2, r3, r4, r5, r6, r7, r8, rs, val, player) {
         r7.setPosition(player.x - 100, player.y).setAlpha(1);
         r8.setPosition(player.x - 75, player.y - 75).setAlpha(1);
         rs.setAlpha(1);
-        switch (val) {
-            case 0 : val = compSelect; break;
-            case 1 : compSelect = val; break;
-            case 2 : compSelect = val; break;
-            case 3 : compSelect = val; break;
-            case 4 : compSelect = val; break;
-            case 5 : compSelect = val; break;
-            case 6 : compSelect = val; break;
-            case 7 : compSelect = val; break;
-            case 8 : compSelect = val; break;
+        if (jeraUnlock == 1) {
+            r2.setTexture('jera');
         }
-        switch (compSelect) {
+        switch (val) {
+            case 0 : val = compSelect; compHilight = val; break;
+            case 1 : compSelect = val; compHilight = val; break;
+            case 2 : if (jeraUnlock == 1) { compSelect = val }else{ compSelect = 0}; compHilight = val; break;
+            case 3 : compSelect = val; compHilight = val; break;
+            case 4 : compSelect = val; compHilight = val; break;
+            case 5 : compSelect = val; compHilight = val; break;
+            case 6 : compSelect = val; compHilight = val; break;
+            case 7 : compSelect = val; compHilight = val; break;
+            case 8 : compSelect = val; compHilight = val; break;
+        }
+        switch (compHilight) {
             case 1 : rs.setPosition(r1.x, r1.y); break;
             case 2 : rs.setPosition(r2.x, r2.y); break;
             case 3 : rs.setPosition(r3.x, r3.y); break;
@@ -284,6 +287,21 @@ function keyPick (player, cle){
     cle.disableBody(true,true);
     this.sound.play('key_pickup');
     key += 1;
+    switch(this.room) {
+        case 1 : room1 = 1; break;
+        case 4 : room4 = 1; break;
+        case 5 : room5 = 1; break;
+        case 7 : room7_1 = 1; break;
+        case 8 : room8_1 = 1; break;
+        case 10 : room10 = 1; break;
+        case 12 : room12 = 1; break;
+    }
+}
+function bossKeyPick (player, cle){
+    cle.disableBody(true,true);
+    this.sound.play('key_pickup');
+    bossKey += 1;
+    this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0);
 }
 function jera (sphere, bloc) {
     if ((buttonPressed == 5) && (compSelect == 2) && (hold == 0)) {
@@ -306,17 +324,8 @@ function throwBloc (player, bloc, cela) {
     }
 }
 function minSpeed (bloc) {
-    if ((bloc.body.velocity.x < 800) && (bloc.body.velocity.x > 0)) {
-        bloc.setVelocityX(800);
-    }
-    if ((bloc.body.velocity.x > -800) && (bloc.body.velocity.x < 0)) {
-        bloc.setVelocityX(-800);
-    }
-    if ((bloc.body.velocity.y < 800) && (bloc.body.velocity.y > 0)) {
-        bloc.setVelocityY(800);
-    }
-    if ((bloc.body.velocity.y > -800) && (bloc.body.velocity.y < 0)) {
-        bloc.setVelocityY(-800);
+    if ((bloc.body.velocity.x +  bloc.body.velocity.y ) < 800) {
+        bloc.setVelocity(bloc.body.velocity.x * 4, bloc.body.velocity.y * 4)
     }
 }
 function doorOpen (door, lock, cela) {
@@ -375,7 +384,7 @@ function endAtk (player, scene, idle) {
                 anim(player, idle);
                 player.setOrigin(0.5,0.5).setOffset(2, 13);   
             }
-            hitBox.disableBody(true, true);
+            hitBox.destroy();
         }, loop: false});
         scene.time.addEvent({ delay: 1000, callback: ()=>{ atk = 0; }, loop: false});
     }
@@ -413,12 +422,9 @@ function enemySprite (enemy, walk, fire, fireboule, player) {
         anim(enemy, walk);
     }else{
         anim(enemy, fire);
-        if (enemy.anims.currentFrame.index === 1) {
-            once = 0;
-        }
-        if ((enemy.anims.currentFrame.index === 3) && (once != 1)) {
+        if (enemy.anims.currentFrame.index === 3) {
             fireboule.create(enemy.x, enemy.y, 'enemy_fire').setScale(3.96,3.9).setVelocity((player.x - enemy.x)/2, (player.y - enemy.y)/2);
-            once = 1;
+            enemy.setAlpha(1);
         }  
     }
 }
@@ -461,8 +467,9 @@ function collBlocWall (bloc, wall){
 }
 function collBlocEnemy (bloc, enemy){
     var nb;
-    if (jet == 1) {
+    if ((jet == 1) && (bloc.angle != 0)) {
         bloc.setVelocity(0,0);
+        enemy.setVelocity(0,0);
         if (bloc.anims.getCurrentKey() != 'explosion') {
             bloc.anims.play('explosion',false).setSize(20,20).setOffset(6, 6);
             this.sound.play('explosion');
@@ -476,6 +483,7 @@ function collBlocEnemy (bloc, enemy){
             bloc.disableBody(true,true);
             enemy.disableBody(true,true);
             jet = 0;
+            count += 1;
         }
     }
 }
@@ -520,7 +528,7 @@ function ballHit (player, ball) {
 function halo () {
     if ((buttonPressed == 5) && (compSelect == 2) && (hold == 0)) {
         anim(sphere, sphereAnim);
-        sphere.setAlpha(1);
+        sphere.setAlpha(0.5);
     }else{
         sphere.setAlpha(0);
     }

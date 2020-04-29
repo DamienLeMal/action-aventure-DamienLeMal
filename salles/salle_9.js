@@ -3,10 +3,6 @@ class salle_9 extends Phaser.Scene {
 		super("salle9");
 	}
 
-	init(data) {
-
-	}
-
 	create() {
 		this.background = this.physics.add.sprite(0,0,'salle5-9-12').setScale(3.96,3.9).setOrigin(0,0);
 		this.door1 = this.physics.add.sprite(400,45,'box').setScale(0.1,0.1).setOrigin(0,0);

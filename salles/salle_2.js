@@ -28,6 +28,7 @@ class salle_2 extends Phaser.Scene {
         box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        atk = 0;
 
          this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -40,8 +41,9 @@ class salle_2 extends Phaser.Scene {
         this.f2 = this.add.image(60,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
         this.h3 = this.add.image(95,25,'coeurH').setScale(3.96,3.9).setOrigin(0,0);
         this.f3 = this.add.image(95,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
-        this.c = this.add.image(150,15,'key').setScale(2.96,2.9).setOrigin(0,0);
+        this.c = this.add.image(145,20,'key_icon').setScale(2.96,2.9).setOrigin(0,0);
         this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
+        if (bossKey == 1) {this.cb = this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0); };
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
         this.runeHud2 = this.add.image(this.player.x + 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
@@ -166,8 +168,7 @@ class salle_2 extends Phaser.Scene {
         sphereAnim = this.halo;
         sphere.setPosition(this.player.x, this.player.y);
         if (hold == 1) {
-           box.x = this.player.x;
-           box.y = this.player.y;
+            box.setPosition(this.player.x, this.player.y);
         }
 	}
 }

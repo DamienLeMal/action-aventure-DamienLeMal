@@ -14,9 +14,10 @@ class salle_0 extends Phaser.Scene {
         this.load.image('salle8','assets/png/salles/spr_salle8.png');
         this.load.image('salle10','assets/png/salles/spr_salle10.png');
         this.load.image('salle11','assets/png/salles/spr_salle11.png');
+        this.load.image('salle12','assets/png/salles/spr_salle12.png');
         this.load.image('salle13','assets/png/salles/spr_salle13.png');
         this.load.image('salle14','assets/png/salles/spr_salle14.png');
-        this.load.image('salle5-9-12','assets/png/salles/spr_salle5-9-12.png');
+        this.load.image('salle5-9-12','assets/png/salles/spr_salle5-9.png');
 		this.load.image('circle','assets/png/spr_sphere_placeholder.png');
 		this.load.image('box','assets/png/spr_transparent.png');
         this.load.image('coeurF','assets/png/item/spr_heart_full.png');
@@ -33,8 +34,16 @@ class salle_0 extends Phaser.Scene {
         this.load.image('door_locked','assets/png/item/spr_door_locked.png');
         this.load.image('enemy_fire','assets/png/enemies/spr_enemy_fire.png');
         this.load.image('key','assets/png/item/spr_key.png');
+        this.load.image('boss_key','assets/png/item/spr_boss_key.png');
+        this.load.image('key_icon','assets/png/item/spr_key_icon.png');
+        this.load.image('boss_key_icon','assets/png/item/spr_boss_key_icon.png');
         this.load.image('pot','assets/png/item/spr_pot.png');
         this.load.image('coffre','assets/png/item/spr_chest_normal.png');
+        this.load.image('coffreBoss','assets/png/item/spr_chest_boss.png');
+        this.load.image('sign','assets/png/item/spr_sign.png');
+        this.load.image('target','assets/png/item/spr_target.png');
+        this.load.image('rune','assets/png/item/spr_rune_pickup.png');
+        this.load.spritesheet('teleporteur','assets/png/item/spr_telep.png',{frameWidth: 15, frameHeight: 15});
         this.load.spritesheet('door_opening','assets/png/item/spr_door_opening.png',{frameWidth: 33, frameHeight: 18});
         this.load.spritesheet('bloc_explosion','assets/png/item/spr_bloc_explosion.png',{frameWidth: 30, frameHeight: 30});
         this.load.spritesheet('player_idle','assets/png/player/spr_player_idle.png',{frameWidth: 15, frameHeight: 20});
@@ -94,6 +103,7 @@ class salle_0 extends Phaser.Scene {
 
         this.heart = this.physics.add.staticGroup();
         //this.heart.create(250,250,'coeurI').setOrigin(0,0).setScale(3.96,3.9).refreshBody();
+        this.cle = this.physics.add.staticGroup();
 
         this.tortue = this.physics.add.group();
         this.tortue1 = this.tortue.create(100, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
@@ -111,6 +121,7 @@ class salle_0 extends Phaser.Scene {
 		box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        atk = 0;
 //HUD
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -123,8 +134,9 @@ class salle_0 extends Phaser.Scene {
         this.f2 = this.add.image(60,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
         this.h3 = this.add.image(95,25,'coeurH').setScale(3.96,3.9).setOrigin(0,0);
         this.f3 = this.add.image(95,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
-        this.c = this.add.image(150,15,'key').setScale(2.96,2.9).setOrigin(0,0);
+        this.c = this.add.image(145,20,'key_icon').setScale(2.96,2.9).setOrigin(0,0);
         this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
+        if (bossKey == 1) {this.cb = this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0); };
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
         this.runeHud2 = this.add.image(this.player.x + 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
@@ -246,6 +258,7 @@ class salle_0 extends Phaser.Scene {
         this.physics.add.collider(this.bloc, this.enemy2, collBlocEnemy, null, this);
         this.physics.add.collider(this.bloc, this.walls, collBlocWall, null, this);
         this.physics.add.collider(this.bloc, this.blocP, collBlocWall, null, this);
+        this.physics.add.overlap(this.player, this.cle, keyPick, null, this);
 		this.physics.add.overlap(this.player, this.door1, porte1, null, this);
         this.physics.add.overlap(this.player, this.door2, porte2, null, this);
         this.physics.add.overlap(this.player, this.door3, porte3, null, this);
@@ -261,13 +274,13 @@ class salle_0 extends Phaser.Scene {
         enemyBrain(this.enemy2_1, this, this.fireBall, this.player);
         enemyBrain(this.enemy2_2, this, this.fireBall, this.player);
 		function porte1 (player, door){
-			this.scene.start("salle10");
+			this.scene.start("salle11");
 		}
         function porte2 (player, door){
             if (this.checkClosedDoors == 0) {
                 if (lock2 == 0) {
                     this.scene.start("salle7");
-                }else if (key > 0){
+                }else if ((key > 0) && (lock2 == 1)){
                     key -= 1;
                     this.doors2_l.anims.play('sesame',false);
                 }
@@ -285,7 +298,7 @@ class salle_0 extends Phaser.Scene {
 
 
 if (buttonPressed === 9) {
-    this.scene.start("salle3");
+    this.scene.start("salle14");
 }
 
 
@@ -308,8 +321,13 @@ if (buttonPressed === 9) {
                 this.player.y = 300;
                 break;
             case 7 :
-                this.player.x = 400;
-                this.player.y = 90;
+                if (telep == 0) {
+                    this.player.x = 400;
+                    this.player.y = 90;
+                }else{
+                    this.player.x = 400;
+                    this.player.y = 300;
+                }
                 break;
             case 1 :
                 this.player.x = 680;
@@ -349,8 +367,7 @@ if (buttonPressed === 9) {
         sphereAnim = this.halo;
     	sphere.setPosition(this.player.x, this.player.y);
         if (hold == 1) {
-    	   box.x = this.player.x;
-    	   box.y = this.player.y;
-	    }
+            box.setPosition(this.player.x, this.player.y);
+        }
     }
 }

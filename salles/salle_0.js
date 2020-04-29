@@ -79,10 +79,10 @@ class salle_0 extends Phaser.Scene {
 		this.door3 = this.physics.add.sprite(715,300,'box').setScale(0.1,0.1).setOrigin(0,0);
 
         this.doors = this.physics.add.group();
+        this.doors1 = this.doors.create(40,368,'door_closed').setOrigin(0,0).setScale(3.96,3.9).setAngle(-90);
+        this.doors1_l = this.doors.create(40,368,'door_locked').setOrigin(0,0).setScale(3.96,3.9).setAngle(-90);
         this.doors2 = this.doors.create(337,35,'door_closed').setOrigin(0,0).setScale(3.96,3.9);
         this.doors2_l = this.doors.create(337,35,'door_locked').setOrigin(0,0).setScale(3.96,3.9);
-        this.doors3 = this.doors.create(756,238,'door_closed').setOrigin(0,0).setScale(3.96,3.9).setAngle(90);
-        this.checkClosedDoors = 1;
 
 		this.walls = this.physics.add.staticGroup();
 		this.walls.create(0,0,'box').setOrigin(0,0).setScale(5.25,37.5).refreshBody();
@@ -90,37 +90,20 @@ class salle_0 extends Phaser.Scene {
 		this.walls.create(0,0,'box').setOrigin(0,0).setScale(50,6).refreshBody();
         this.walls.create(0,500,'box').setOrigin(0,0).setScale(50,6.2).refreshBody();
 
-        this.bloc = this.physics.add.group();
-        this.bloc.create(350, 400, 'bloc').setScale(3.96,3.9).setImmovable(true);
-        this.bloc.create(500, 400, 'bloc').setScale(3.96,3.9).setImmovable(true);
-
         this.blocP = this.physics.add.staticGroup();
-        this.blocP.create(300, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
-        this.blocP.create(400, 200, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
+        this.blocP.create(135, 130, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
+        this.blocP.create(665, 130, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
 
         this.pot = this.physics.add.group();
-        this.pot.create(200,300,'pot').setScale(3,3).setImmovable(true);
+        this.pot.create(135,470,'pot').setScale(3,3).setImmovable(true);
+        this.pot.create(665,470,'pot').setScale(3,3).setImmovable(true);
 
         this.heart = this.physics.add.staticGroup();
-        //this.heart.create(250,250,'coeurI').setOrigin(0,0).setScale(3.96,3.9).refreshBody();
-        this.cle = this.physics.add.staticGroup();
-
-        this.tortue = this.physics.add.group();
-        this.tortue1 = this.tortue.create(100, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
-        this.tortue2 = this.tortue.create(200, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
-
-        this.enemy2 = this.physics.add.group();
-        this.enemy2_1 = this.enemy2.create(300, 400, 'enemy_2').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
-        this.enemy2_2 = this.enemy2.create(300, 200, 'enemy_2').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
-
-        this.fireBall = this.physics.add.group();
-        this.fireBall.create(300, 200, 'enemy_fire').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
-
 //Player
-		sphere = this.physics.add.sprite(600,450,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
-		box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
+		sphere = this.physics.add.sprite(-100,-100,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
+		box = this.physics.add.sprite(-100,-100,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
-        this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
 //HUD
         this.hud_x = 25;
@@ -149,7 +132,7 @@ class salle_0 extends Phaser.Scene {
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
         this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
-        this.playerGhost = this.physics.add.sprite(600,450,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
+        this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 //Animations
         this.idle = this.anims.create({
             key:'idle',
@@ -205,24 +188,6 @@ class salle_0 extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-        this.turtle = this.anims.create({
-            key:'turtle',
-            frames: this.anims.generateFrameNumbers('enemy_turtle', {start: 0, end: 1}),
-            frameRate: 4,
-            repeat: -1
-        });
-        this.ennemis2 = this.anims.create({
-            key:'ennemis2',
-            frames: this.anims.generateFrameNumbers('enemy_2', {start: 0, end: 1}),
-            frameRate: 4,
-            repeat: -1
-        });
-        this.enemyFire = this.anims.create({
-            key:'enemyFire',
-            frames: this.anims.generateFrameNumbers('enemy_2_fire', {start: 0, end: 2}),
-            frameRate: 4,
-            repeat: -1
-        });
         this.ded = this.anims.create({
             key:'ded',
             frames: this.anims.generateFrameNumbers('player_dies', {start: 0, end: 5}),
@@ -236,79 +201,49 @@ class salle_0 extends Phaser.Scene {
             repeat: 1
         });
 //colliders & functions
-        this.physics.add.collider(this.pot, this.tortue);
-        this.physics.add.collider(this.pot, this.enemy2);
         this.physics.add.collider(this.pot, this.player);
-        this.physics.add.collider(this.tortue, this.walls);
-        this.physics.add.collider(this.tortue, this.blocP);
-        this.physics.add.collider(this.tortue, this.tortue);
-        this.physics.add.collider(this.enemy2, this.walls);
-        this.physics.add.collider(this.enemy2, this.blocP);
-        this.physics.add.collider(this.enemy2, this.tortue);
-        this.physics.add.collider(this.enemy2, this.enemy2);
 		this.physics.add.collider(this.player, this.walls);
         this.physics.add.collider(this.player, this.blocP);
-        this.physics.add.collider(this.fireBall, this.pot, ballColl, null, this);
-        this.physics.add.collider(this.fireBall, this.bloc, ballColl, null, this);
-        this.physics.add.collider(this.fireBall, this.blocP, ballColl, null, this);
-        this.physics.add.collider(this.player, this.tortue, getReckt, null, this);
-        this.physics.add.collider(this.player, this.enemy2, getReckt, null, this);
-        this.physics.add.collider(this.player, this.bloc, collBloc, null, this);
-        this.physics.add.collider(this.bloc, this.tortue, collBlocEnemy, null, this);
-        this.physics.add.collider(this.bloc, this.enemy2, collBlocEnemy, null, this);
-        this.physics.add.collider(this.bloc, this.walls, collBlocWall, null, this);
-        this.physics.add.collider(this.bloc, this.blocP, collBlocWall, null, this);
-        this.physics.add.overlap(this.player, this.cle, keyPick, null, this);
 		this.physics.add.overlap(this.player, this.door1, porte1, null, this);
         this.physics.add.overlap(this.player, this.door2, porte2, null, this);
         this.physics.add.overlap(this.player, this.door3, porte3, null, this);
-        this.physics.add.overlap(sphere, this.bloc, jera, null, this);
-        this.physics.add.overlap(this.player, this.fireBall, ballHit, null, this);
         this.physics.add.overlap(this.player, this.heart, heartPick, null, this);
         this.physics.add.overlap(this.pot, this.teiwaz, casse, null, this);
-        this.physics.add.overlap(this.tortue, this.teiwaz, tue, null, this);
-        this.physics.add.overlap(this.enemy2, this.teiwaz, tue, null, this);
 
-        enemyBrain(this.tortue1, this);
-        enemyBrain(this.tortue2, this);
-        enemyBrain(this.enemy2_1, this, this.fireBall, this.player);
-        enemyBrain(this.enemy2_2, this, this.fireBall, this.player);
 		function porte1 (player, door){
-			this.scene.start("salle11");
+			if (this.checkClosedDoors == 0) {
+                if (lock2 == 0) {
+                    this.scene.start("salle11");
+                }else if ((key > 0) && (lock2 == 1)){
+                    key -= 1;
+                    this.doors1_l.anims.play('sesame',false);
+                }
+            }
 		}
         function porte2 (player, door){
             if (this.checkClosedDoors == 0) {
-                if (lock2 == 0) {
+                if (lock1 == 0) {
                     this.scene.start("salle7");
-                }else if ((key > 0) && (lock2 == 1)){
+                }else if ((key > 0) && (lock1 == 1)){
                     key -= 1;
                     this.doors2_l.anims.play('sesame',false);
                 }
             }
         }
         function porte3 (player, door){
-            if (this.checkClosedDoors == 0) {
-                this.scene.start("salle1");
-            }
+            this.scene.start("salle1");
         }
     }
 
 	update() {
 
-
-
 if (buttonPressed === 9) {
-    this.scene.start("salle14");
+    this.scene.start("salle9");
 }
-
-
-
-
-
-
-        lock2 = doorOpen(this.doors2_l,lock2, this);
+        lock1 = doorOpen(this.doors2_l,lock2, this);
+        lock2 = doorOpen(this.doors1_l,lock2, this);
+        this.checkClosedDoors = doorOpen(this.doors1,this.checkClosedDoors, this);
         this.checkClosedDoors = doorOpen(this.doors2,this.checkClosedDoors, this);
-        this.checkClosedDoors = doorOpen(this.doors3,this.checkClosedDoors, this);
 
 		//Hero start position
         switch (lastRoom) {
@@ -336,10 +271,6 @@ if (buttonPressed === 9) {
         }
         lastRoom = 0;
 
-
-
-
-
         this.u = pad(this.player, box, this.up, this.down, this.side, this.idle);
         if (buttonPressed == 4) {
             this.physics.world.timeScale = 6;
@@ -354,15 +285,10 @@ if (buttonPressed === 9) {
         throwBloc(this.player, blocGrab, this);
         teiwaz(this.player, this.atk_up, this.atk_down, this.atk_side, this.teiwaz, this);
         endAtk(this.player, this, this.idle);
-        enemySprite(this.tortue1, this.turtle);
-        enemySprite(this.tortue2, this.turtle);
-        enemySprite(this.enemy2_1, this.ennemis2, this.enemyFire, this.fireBall, this.player);
-        enemySprite(this.enemy2_2, this.ennemis2, this.enemyFire, this.fireBall, this.player);
         resetReckt(this, this.player, mechant);
         deathScreen(this.blackScreen, this.player, this.playerGhost, this.ded, this);
         halo(this);
         updateText(this.ct);
-        fireBoule = this.fireball;
 
         sphereAnim = this.halo;
     	sphere.setPosition(this.player.x, this.player.y);

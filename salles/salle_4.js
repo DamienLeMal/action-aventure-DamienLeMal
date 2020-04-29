@@ -52,10 +52,10 @@ class salle_4 extends Phaser.Scene {
         this.tortue2 = this.tortue.create(200, 375, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
         count = 0;
 
-        sphere = this.physics.add.sprite(600,450,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
-        box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
+        sphere = this.physics.add.sprite(-100,-100,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
+        box = this.physics.add.sprite(-100,-100,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
-        this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
         
         this.hud_x = 25;
@@ -84,7 +84,7 @@ class salle_4 extends Phaser.Scene {
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
         this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
-        this.playerGhost = this.physics.add.sprite(600,450,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
+        this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 
 		this.idle = this.anims.create({
             key:'idle',

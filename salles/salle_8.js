@@ -67,10 +67,10 @@ class salle_8 extends Phaser.Scene {
         this.enemy2_5 = this.enemy2.create(140, 880, 'enemy_2').setScale(3.96,3.9).setSize(15,15).setOffset(3,0);//.setVelocity(100,0).setBounce(1);
         this.fireBall = this.physics.add.group();
 
-        sphere = this.physics.add.sprite(600,450,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
-        box = this.physics.add.sprite(600,450,'box').setOrigin(2,0.5).setScale(3.96,3.9);
+        sphere = this.physics.add.sprite(-100,-100,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
+        box = this.physics.add.sprite(-100,-100,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
-        this.player = this.physics.add.sprite(600,450,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
 
         this.hud_x = 25;
@@ -99,7 +99,7 @@ class salle_8 extends Phaser.Scene {
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
         this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
-        this.playerGhost = this.physics.add.sprite(600,450,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
+        this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 
 		this.idle = this.anims.create({
             key:'idle',
@@ -212,7 +212,7 @@ class salle_8 extends Phaser.Scene {
                 this.scene.start("salle9");
             }else if ((key > 0) && (lock8 == 1)){
                 key -= 1;
-                this.doors1_l.anims.play('sesame',false);
+                this.doors2_l.anims.play('sesame',false);
             }
         }
         function porte3 (player,door){

@@ -48,6 +48,7 @@ var room7_1 = 0;//clé
 var room7_2 = 0;//coffre
 var room8_1 = 0;
 var room8_2 = 0;
+var room9 = 0;
 var room10 = 0;
 var room12 = 0;
 var room13 = 0;

@@ -525,24 +525,3 @@ function canonOrientation (canon, player, stun) {
         canon.setAngle(-180);
     }
 }
-function constSpeed (x1, y1, x2, y2, bloc) {//prototype
-    var ix = x2 - x1;
-    var iy = y2 - y1;
-    console.log("start : " + ix, iy, x1, y1, x1, y2);
-    
-   while ((Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) < 70) || ((Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) > 80))) {
-        while (Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) > 80) {
-            ix -= 1;
-            iy -= 1;
-        }
-        while (Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) < 70) {
-            ix += 1;
-            iy += 1;
-        }
-        console.log(Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))));
-        //console.log(ix, iy, Math.pow(ix, 2), Math.pow(iy, 2));
-   }
-        console.log("final : " + Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))));
-        console.log("final : " + ix, iy, Math.pow(ix, 2), Math.pow(iy, 2));
-        bloc.setVelocity(ix, iy);
-}

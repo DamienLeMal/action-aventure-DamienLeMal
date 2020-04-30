@@ -238,12 +238,7 @@ class salle_0 extends Phaser.Scene {
             this.scene.start("salle1");
         }
     }
-
 	update() {
-
-if (buttonPressed === 9) {
-    this.scene.start("salle14");
-}
         lock1 = doorOpen(this.doors2_l,lock1, this);
         lock2 = doorOpen(this.doors1_l,lock2, this);
 

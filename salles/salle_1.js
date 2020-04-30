@@ -43,6 +43,7 @@ class salle_1 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 //HUD
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -58,6 +59,7 @@ class salle_1 extends Phaser.Scene {
         this.c = this.add.image(145,20,'key_icon').setScale(2.96,2.9).setOrigin(0,0);
         this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
         if (bossKey == 1) {this.cb = this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0); };
+        this.add.text(300,450, "Attaquez avec R1 ou RB");
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
         this.runeHud2 = this.add.image(this.player.x + 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
@@ -216,7 +218,7 @@ class salle_1 extends Phaser.Scene {
             this.doors1.anims.play('sesame',false);
             this.doors2.anims.play('sesame',false);
             if ((this.room == 0) && (room1 == 0)) {
-                this.cle.create(600, 250, 'key').setScale(3.96,3.9).refreshBody();
+                this.cle.create(600, 300, 'key').setScale(3.96,3.9).refreshBody();
                 this.room = 1;
             }
             count = 0;

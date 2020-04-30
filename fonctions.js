@@ -112,16 +112,6 @@ function controller (player, a, b, value) {
                     buttonPressed = 0;
                 }
                 break;
-            case 2 :
-                if (value != 0) {
-                    player.setTint(0x00ff00);
-                }
-                break;
-            case 3 :
-                if (value != 0) {
-                    player.setTint(0x0000ff);
-                }
-                break;
             case 4 :
                 if (value != 0) {
                     buttonPressed = 4;
@@ -138,21 +128,6 @@ function controller (player, a, b, value) {
                     sphere.alpha = 0;
                 }else{
                     sphere.alpha = 0;
-                }
-                break;
-            case 6 :
-                if (value != 0) {
-                    player.setTint(0xff00ff);
-                }
-                break;
-            case 7 :
-                if (value != 0) {
-                    player.setTint(0xffffff);
-                }
-                break;
-            case 8 :
-                if (value != 0) {
-                    player.setTint(0xf0f0f0);
                 }
                 break;
             case 9 :
@@ -308,7 +283,11 @@ function jera (sphere, bloc) {
         this.sound.play('telekinesis');
         bloc.setAlpha(0).setPosition(-100,-100);
         blocGrab = bloc;
-        box.setTexture('bloc');
+        if (lastRoom != 15) {
+            box.setTexture('bloc');
+        }else{
+            box.setTexture('boss_fire');
+        }
         hold = 1;
     }
 }
@@ -316,7 +295,7 @@ function throwBloc (player, bloc, cela) {
     if ((hold == 1) && (buttonPressed != 5)){
         hold = 0;
         box.setTexture('box');
-        bloc.setAlpha(1).setPosition(stick_x*100 + player.x, stick_y*100 + player.y).setVelocity((bloc.x - player.x)*15, (bloc.y - player.y)*15);
+        bloc.setAlpha(0.9).setPosition(stick_x*100 + player.x, stick_y*100 + player.y).setVelocity((bloc.x - player.x)*15, (bloc.y - player.y)*15);
         cela.sound.play('throw');
         bloc.rotation = rotation;
         minSpeed(bloc);
@@ -538,4 +517,32 @@ function updateText (t) {
 }
 function ballColl (ball, other) {
     ball.destroy();
+}
+function canonOrientation (canon, player, stun) {
+    if (stun == 0) {
+        canon.setAngle(Phaser.Math.RadToDeg(Phaser.Math.Angle.Between(player.x,player.y + 10,canon.x,canon.y)) + 90);
+    }else{
+        canon.setAngle(-180);
+    }
+}
+function constSpeed (x1, y1, x2, y2, bloc) {//prototype
+    var ix = x2 - x1;
+    var iy = y2 - y1;
+    console.log("start : " + ix, iy, x1, y1, x1, y2);
+    
+   while ((Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) < 70) || ((Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) > 80))) {
+        while (Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) > 80) {
+            ix -= 1;
+            iy -= 1;
+        }
+        while (Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))) < 70) {
+            ix += 1;
+            iy += 1;
+        }
+        console.log(Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))));
+        //console.log(ix, iy, Math.pow(ix, 2), Math.pow(iy, 2));
+   }
+        console.log("final : " + Math.sqrt((Math.pow(ix, 2) + Math.pow(iy, 2))));
+        console.log("final : " + ix, iy, Math.pow(ix, 2), Math.pow(iy, 2));
+        bloc.setVelocity(ix, iy);
 }

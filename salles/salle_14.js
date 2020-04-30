@@ -22,7 +22,6 @@ class salle_14 extends Phaser.Scene {
 
         this.blocP = this.physics.add.staticGroup();
 
-
         this.blocP.create(280, 130, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
         this.blocP.create(340, 130, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
         this.blocP.create(400, 130, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
@@ -32,7 +31,6 @@ class salle_14 extends Phaser.Scene {
         this.blocP.create(400, 190, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
         this.blocP.create(460, 190, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
         this.blocP.create(400, 250, 'bloc_push').setScale(3.96,3.9).setSize(60,60).setOffset(-22);
-        
 
         this.heart = this.physics.add.staticGroup();
 
@@ -47,6 +45,7 @@ class salle_14 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -207,6 +206,8 @@ class salle_14 extends Phaser.Scene {
         endAtk(this.player, this, this.idle);
         enemySprite(this.tortue1, this.turtle);
         enemySprite(this.tortue2, this.turtle);
+        enemySprite(this.tortue3, this.turtle);
+        enemySprite(this.tortue4, this.turtle);
         resetReckt(this, this.player, mechant);
         deathScreen(this.blackScreen, this.player, this.playerGhost, this.ded, this);
         halo(this);

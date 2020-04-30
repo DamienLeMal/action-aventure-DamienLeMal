@@ -43,7 +43,7 @@ class salle_11 extends Phaser.Scene {
         this.chest = this.physics.add.staticGroup();
 
         this.tortue = this.physics.add.group();
-        this.tortue1 = this.tortue.create(400, 150, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
+        this.tortue1 = this.tortue.create(600, 150, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
         this.tortue2 = this.tortue.create(400, 300, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
         this.tortue3 = this.tortue.create(400, 450, 'enemy_turtle').setScale(3.96,3.9).setVelocity(100,0).setBounce(1);
         count = 0;
@@ -53,6 +53,7 @@ class salle_11 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -224,14 +225,17 @@ class salle_11 extends Phaser.Scene {
         if (count == 3) {
             this.doors1.anims.play('sesame',false);
             this.doors2.anims.play('sesame',false);
-            this.chest1 = this.chest.create(440,300,'coffre').setScale(3.96,3.9).refreshBody();
+            if (room11 == 0) {
+                this.chest1 = this.chest.create(440,300,'coffre').setScale(3.96,3.9).refreshBody();
+            }
             this.var = 1;
             count = 0;
         }
-        if ((buttonPressed == 20) && (this.var == 1) && (this.player.x < 540) && (this.player.x > 340) && (this.player.y < 400) && (this.player.y > 200)) {
+        if ((buttonPressed == 20) && (this.var == 1) && (room11 == 0) && (this.player.x < 540) && (this.player.x > 340) && (this.player.y < 400) && (this.player.y > 200)) {
             this.chest1.disableBody(true, true);
             this.heart.create(440,300,'coeurI').setScale(3.96,3.9).refreshBody();
             this.var = 0;
+            room11 = 1;
         }
 	}
 }

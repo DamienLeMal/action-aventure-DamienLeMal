@@ -9,7 +9,7 @@ class salle_9 extends Phaser.Scene {
 		this.door2 = this.physics.add.sprite(400,495,'box').setScale(0.1,0.1).setOrigin(0,0);
 
         this.doors = this.physics.add.group();
-        this.doors1_l = this.doors.create(337,35,'door_locked').setOrigin(0,0).setScale(3.96,3.9);
+        this.doors1_l = this.doors.create(337,35,'door_boss').setOrigin(0,0).setScale(3.96,3.9);
 
 		this.walls = this.physics.add.staticGroup();
         this.walls.create(0,0,'box').setOrigin(0,0).setScale(5.25,37.5).refreshBody();
@@ -50,6 +50,7 @@ class salle_9 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -176,7 +177,6 @@ class salle_9 extends Phaser.Scene {
         }
         heart(this.h1,this.f1,this.h2,this.f2,this.h3,this.f3);
         rune(this.runeHud1, this.runeHud2, this.runeHud3, this.runeHud4, this.runeHud5, this.runeHud6, this.runeHud7, this.runeHud8, this.runeSelect, this.u, this.player);
-        throwBloc(this.player, blocGrab, this);
         teiwaz(this.player, this.atk_up, this.atk_down, this.atk_side, this.teiwaz, this);
         endAtk(this.player, this, this.idle);
         resetReckt(this, this.player, mechant);

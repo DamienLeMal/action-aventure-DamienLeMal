@@ -40,6 +40,7 @@ class salle_6 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -143,14 +144,16 @@ class salle_6 extends Phaser.Scene {
 			this.scene.start("salle5");
 		}
         function unlock (player, rune) {
+            this.sound.play('rune_pickup');
             rune.disableBody(true, true);
-                compSelect = 1;
+            compSelect = 1;
             jeraUnlock = 1;
             this.bloc.create(281,470,'bloc').setScale(3.96,3.9).setImmovable(true);
             this.bloc.create(340,470,'bloc').setScale(3.96,3.9).setImmovable(true);
             this.bloc.create(400,470,'bloc').setScale(3.96,3.9).setImmovable(true);
             this.bloc.create(460,470,'bloc').setScale(3.96,3.9).setImmovable(true);
             this.bloc.create(520,470,'bloc').setScale(3.96,3.9).setImmovable(true);
+            this.add.text(250,200, "Changez de competence avec L1 ou LB");
             this.sound.play('player_hit');
         }
         this.time.addEvent({ delay: 1000, callback: ()=>{ 
@@ -160,7 +163,6 @@ class salle_6 extends Phaser.Scene {
                 this.r = 0;
             }
         }, loop: true});
-        
 	}
 
 	update() {

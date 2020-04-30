@@ -106,6 +106,7 @@ class salle_13 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -132,7 +133,7 @@ class salle_13 extends Phaser.Scene {
         this.runeHud8 = this.add.image(this.player.x - 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
-        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
+        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(200,100).setTint(0x000000).setAlpha(0);
         this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 
 		this.idle = this.anims.create({
@@ -285,12 +286,13 @@ class salle_13 extends Phaser.Scene {
                 this.scene.start("salle12");
             }
         }
+        this.player.setPosition(200,200);
 	}
 
 	update() {
 
         lock6 = doorOpen(this.doors2_l,lock6, this);
-        lock7 = doorOpen(this.doors2_l,lock7, this);
+        lock7 = doorOpen(this.doors1_l,lock7, this);
         this.checkClosedDoors = doorOpen(this.doors1,this.checkClosedDoors, this);
         this.checkClosedDoors = doorOpen(this.doors2,this.checkClosedDoors, this);
         this.checkClosedDoors = doorOpen(this.doors3,this.checkClosedDoors, this);

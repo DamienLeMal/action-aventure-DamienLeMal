@@ -72,6 +72,7 @@ class salle_8 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -98,7 +99,7 @@ class salle_8 extends Phaser.Scene {
         this.runeHud8 = this.add.image(this.player.x - 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
-        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,100).setTint(0x000000).setAlpha(0);
+        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(100,200).setTint(0x000000).setAlpha(0);
         this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
 
 		this.idle = this.anims.create({
@@ -193,6 +194,7 @@ class salle_8 extends Phaser.Scene {
         this.physics.add.overlap(this.player, this.cle, keyPick, null, this);
         this.physics.add.overlap(this.player, this.door1, porte1, null, this);
         this.physics.add.overlap(this.player, this.door2, porte2, null, this);
+        this.physics.add.overlap(this.player, this.door3, porte3, null, this);
         this.physics.add.overlap(sphere, this.bloc, jera, null, this);
         this.physics.add.overlap(this.player, this.fireBall, ballHit, null, this);
         this.physics.add.overlap(this.player, this.heart, heartPick, null, this);

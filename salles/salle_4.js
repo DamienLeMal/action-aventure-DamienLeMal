@@ -38,7 +38,6 @@ class salle_4 extends Phaser.Scene {
 
         this.panneau = this.physics.add.sprite(500,300,'sign').setScale(3.96,3.9).setImmovable(true);
         this.cible = this.physics.add.sprite(1500,300,'target').setScale(3.96,3.9).setImmovable(true);
-        console.log(room4);
         if (room4 == 1) {
             this.cible.disableBody(true, true);
         }
@@ -57,6 +56,7 @@ class salle_4 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
         
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -72,6 +72,7 @@ class salle_4 extends Phaser.Scene {
         this.c = this.add.image(145,20,'key_icon').setScale(2.96,2.9).setOrigin(0,0);
         this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
         if (bossKey == 1) {this.cb = this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0); };
+        this.add.text(200,150, "X ou A pour utiliser un objet");
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
         this.runeHud2 = this.add.image(this.player.x + 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);

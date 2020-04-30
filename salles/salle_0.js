@@ -32,6 +32,7 @@ class salle_0 extends Phaser.Scene {
         this.load.image('bloc_push','assets/png/item/spr_bloc_push.png');
         this.load.image('door_closed','assets/png/item/spr_door_closed.png');
         this.load.image('door_locked','assets/png/item/spr_door_locked.png');
+        this.load.image('door_boss','assets/png/item/spr_door_boss.png');
         this.load.image('enemy_fire','assets/png/enemies/spr_enemy_fire.png');
         this.load.image('key','assets/png/item/spr_key.png');
         this.load.image('boss_key','assets/png/item/spr_boss_key.png');
@@ -43,6 +44,13 @@ class salle_0 extends Phaser.Scene {
         this.load.image('sign','assets/png/item/spr_sign.png');
         this.load.image('target','assets/png/item/spr_target.png');
         this.load.image('rune','assets/png/item/spr_rune_pickup.png');
+        this.load.image('boss_canon','assets/png/enemies/spr_boss_canon.png');
+        this.load.image('boss_fire','assets/png/enemies/spr_boss_fire.png');
+        this.load.image('boss_fireP','assets/png/enemies/spr_boss_fireP.png');
+        this.load.image('boss_halo1','assets/png/enemies/spr_boss_halo_back.png');
+        this.load.image('boss_halo2','assets/png/enemies/spr_boss_halo_front.png');
+        this.load.image('boss_idle','assets/png/enemies/spr_boss_idle.png');
+        this.load.image('boss_stun','assets/png/enemies/spr_boss_stun.png');
         this.load.spritesheet('teleporteur','assets/png/item/spr_telep.png',{frameWidth: 15, frameHeight: 15});
         this.load.spritesheet('door_opening','assets/png/item/spr_door_opening.png',{frameWidth: 33, frameHeight: 18});
         this.load.spritesheet('bloc_explosion','assets/png/item/spr_bloc_explosion.png',{frameWidth: 30, frameHeight: 30});
@@ -59,13 +67,13 @@ class salle_0 extends Phaser.Scene {
         this.load.spritesheet('enemy_2_fire','assets/png/enemies/spr_enemy_2_fire.png',{frameWidth: 21, frameHeight: 18});
         this.load.spritesheet('halo','assets/png/item/spr_jera_halo.png',{frameWidth: 55, frameHeight: 55});
         this.load.audio('boss_dies','assets/wav/boss_dies.wav');
-        this.load.audio('boss_hit','assets/wav/boss_hit.wav');
+        this.load.audio('boss_hit','assets/wav/boss_hit.wav');///////////////////////////////
         this.load.audio('open_door','assets/wav/open_door.wav');/////////////////////////////
         this.load.audio('explosion','assets/wav/explosion.wav');/////////////////////////////
         this.load.audio('key_pickup','assets/wav/key_pickup.wav');/////////////
         this.load.audio('monster_hit','assets/wav/monster_hit.wav');/////////////////////////
         this.load.audio('player_hit','assets/wav/player_hit.wav');///////////////////////////
-        this.load.audio('rune_pickup','assets/wav/rune_pickup.wav');
+        this.load.audio('rune_pickup','assets/wav/rune_pickup.wav');/////////////////////////
         this.load.audio('sword','assets/wav/sword.wav');/////////////////////////////////////
         this.load.audio('telekinesis','assets/wav/telekinesis.wav');/////////////////////////
         this.load.audio('throw','assets/wav/throw.wav');/////////////////////////////////////
@@ -79,9 +87,7 @@ class salle_0 extends Phaser.Scene {
 		this.door3 = this.physics.add.sprite(715,300,'box').setScale(0.1,0.1).setOrigin(0,0);
 
         this.doors = this.physics.add.group();
-        this.doors1 = this.doors.create(40,368,'door_closed').setOrigin(0,0).setScale(3.96,3.9).setAngle(-90);
         this.doors1_l = this.doors.create(40,368,'door_locked').setOrigin(0,0).setScale(3.96,3.9).setAngle(-90);
-        this.doors2 = this.doors.create(337,35,'door_closed').setOrigin(0,0).setScale(3.96,3.9);
         this.doors2_l = this.doors.create(337,35,'door_locked').setOrigin(0,0).setScale(3.96,3.9);
 
 		this.walls = this.physics.add.staticGroup();
@@ -105,6 +111,7 @@ class salle_0 extends Phaser.Scene {
         this.teiwaz = this.physics.add.staticGroup();
         this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
         atk = 0;
+        hold = 0;
 //HUD
         this.hud_x = 25;
         for (var i = 0; i < pv_max/2; i++) {
@@ -119,6 +126,7 @@ class salle_0 extends Phaser.Scene {
         this.f3 = this.add.image(95,25,'coeurF').setScale(3.96,3.9).setOrigin(0,0);
         this.c = this.add.image(145,20,'key_icon').setScale(2.96,2.9).setOrigin(0,0);
         this.ct = this.add.text(185, 20, "x 0").setScale(2,2);
+        this.add.text(200,450, "Utilisez le Joysticks pour vous deplacer");
         if (bossKey == 1) {this.cb = this.add.image(260,18,'boss_key_icon').setScale(2.96,2.9).setOrigin(0,0).setScrollFactor(0); };
 
         this.runeHud1 = this.add.image(this.player.x, this.player.y + 100, 'runeBox').setScale(3.96,3.9);
@@ -211,23 +219,19 @@ class salle_0 extends Phaser.Scene {
         this.physics.add.overlap(this.pot, this.teiwaz, casse, null, this);
 
 		function porte1 (player, door){
-			if (this.checkClosedDoors == 0) {
-                if (lock2 == 0) {
-                    this.scene.start("salle11");
-                }else if ((key > 0) && (lock2 == 1)){
-                    key -= 1;
-                    this.doors1_l.anims.play('sesame',false);
-                }
+            if (lock2 == 0) {
+                this.scene.start("salle10");
+            }else if ((key > 0) && (lock2 == 1)){
+                key -= 1;
+                this.doors1_l.anims.play('sesame',false);
             }
 		}
         function porte2 (player, door){
-            if (this.checkClosedDoors == 0) {
-                if (lock1 == 0) {
-                    this.scene.start("salle7");
-                }else if ((key > 0) && (lock1 == 1)){
-                    key -= 1;
-                    this.doors2_l.anims.play('sesame',false);
-                }
+            if (lock1 == 0) {
+                this.scene.start("salle7");
+            }else if ((key > 0) && (lock1 == 1)){
+                key -= 1;
+                this.doors2_l.anims.play('sesame',false);
             }
         }
         function porte3 (player, door){
@@ -238,12 +242,10 @@ class salle_0 extends Phaser.Scene {
 	update() {
 
 if (buttonPressed === 9) {
-    this.scene.start("salle9");
+    this.scene.start("salle14");
 }
-        lock1 = doorOpen(this.doors2_l,lock2, this);
+        lock1 = doorOpen(this.doors2_l,lock1, this);
         lock2 = doorOpen(this.doors1_l,lock2, this);
-        this.checkClosedDoors = doorOpen(this.doors1,this.checkClosedDoors, this);
-        this.checkClosedDoors = doorOpen(this.doors2,this.checkClosedDoors, this);
 
 		//Hero start position
         switch (lastRoom) {
@@ -274,9 +276,6 @@ if (buttonPressed === 9) {
         this.u = pad(this.player, box, this.up, this.down, this.side, this.idle);
         if (buttonPressed == 4) {
             this.physics.world.timeScale = 6;
-
-            this.doors3.anims.play('sesame',false);
-            this.doors2.anims.play('sesame',false);
         }else{
             this.physics.world.timeScale = 1;
         }

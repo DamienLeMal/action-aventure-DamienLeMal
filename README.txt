@@ -1,0 +1,1 @@
+Jouable uniquement à la manette, certaines des mécaniques sont basés sur l'emplois des joysticks.

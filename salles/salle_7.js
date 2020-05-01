@@ -71,7 +71,7 @@ class salle_7 extends Phaser.Scene {
         sphere = this.physics.add.sprite(-100,-100,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
         box = this.physics.add.sprite(-100,-100,'box').setOrigin(2,0.5).setScale(3.96,3.9);
         this.teiwaz = this.physics.add.staticGroup();
-        this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5);
+        this.player = this.physics.add.sprite(-100,-100,'player_idle').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setDepth(10);
         atk = 0;
         hold = 0;
 
@@ -100,8 +100,8 @@ class salle_7 extends Phaser.Scene {
         this.runeHud8 = this.add.image(this.player.x - 75, this.player.y - 75, 'runeBox').setScale(3.96,3.9);
         this.runeSelect = this.add.image(this.player.x - 75, this.player.y + 75, 'runeSelect').setScale(3.96,3.9);
 
-        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(200,100).setTint(0x000000).setAlpha(0);
-        this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1);
+        this.blackScreen = this.add.image(-100, -100, 'bloc').setOrigin(0,0).setScale(200,100).setTint(0x000000).setAlpha(0).setDepth(9);
+        this.playerGhost = this.physics.add.sprite(-100,-100,'box').setScale(3.96,3.9).setSize(11,6).setOffset(2, 13).setOrigin(0.5,0.5).setBounce(1).setDepth(10);
 
 		this.idle = this.anims.create({
             key:'idle',
@@ -190,6 +190,7 @@ class salle_7 extends Phaser.Scene {
         this.physics.add.collider(this.tortue, this.blocP);
         this.physics.add.collider(this.tortue, this.tortue);
         this.physics.add.collider(this.player, this.walls);
+        this.physics.add.collider(this.player, this.void);
         this.physics.add.collider(this.player, this.chestBoss);
         this.physics.add.collider(this.player, this.blocP);
         this.physics.add.collider(this.player, this.tortue, getReckt, null, this);

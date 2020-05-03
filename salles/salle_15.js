@@ -43,7 +43,7 @@ class salle_15 extends Phaser.Scene {
         this.compteCanon = 3;
         this.nbrCanon = [1, 1, 1, 0];
         this.delais = 1500;
-        this.death = 1;
+        this.death = 0;
 
         sphere = this.physics.add.sprite(-100,-100,'circle').setScale(3.96,3.9).setCircle(28).setAlpha(0);
         box = this.physics.add.sprite(-100,-100,'box').setOrigin(2,0.5).setScale(3.96,3.9);
@@ -142,6 +142,8 @@ class salle_15 extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.walls);
+        this.physics.add.collider(this.player, this.fireball, ballHit, null, this);
+        this.physics.add.collider(this.player, this.fireballP, ballHit, null, this);
         this.physics.add.collider(this.player, this.blocP);
         this.physics.add.collider(this.player, this.boss);
         this.physics.add.overlap(this.fireball, this.canon1, canonRekt1, null, this);
@@ -377,6 +379,7 @@ class salle_15 extends Phaser.Scene {
         if (hold == 1) {
             box.setPosition(this.player.x, this.player.y);
         }
+        console.log(this.death);
         if (this.death == 1) {
         	if (this.blackScreen.alpha < 1) {
             	this.blackScreen.alpha += 0.01;

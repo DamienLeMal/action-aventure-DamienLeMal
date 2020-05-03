@@ -155,9 +155,11 @@ class salle_9 extends Phaser.Scene {
         function porte2 (player,door){
             this.scene.start("salle8");
         }
+        this.player.setPosition(300,300);
 	}
 
 	update() {
+        lock9 = doorOpen(this.doors1_l,lock9, this);
 		switch (lastRoom) {
             case 15 :
                 this.player.x = 400;

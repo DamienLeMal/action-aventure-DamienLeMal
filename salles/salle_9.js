@@ -155,7 +155,6 @@ class salle_9 extends Phaser.Scene {
         function porte2 (player,door){
             this.scene.start("salle8");
         }
-        this.player.setPosition(300,300);
 	}
 
 	update() {

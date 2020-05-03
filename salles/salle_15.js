@@ -172,11 +172,13 @@ class salle_15 extends Phaser.Scene {
         			this.getUp = 0;
         		}
 				this.recktTime = this.time.addEvent({ delay: 5000, callback: ()=>{ 
-        		    this.stun = 0;
-        		    canon.setAlpha(1);
-        			this.nbrCanon[0] = 1;
-        			this.compteCanon += 1;
-        			this.recktTime.remove(false);
+        		    if (this.stun == 1) {
+                        this.stun = 0;
+                        canon.setAlpha(1);
+                        this.nbrCanon[2] = 1;
+                        this.compteCanon += 1;
+                        this.recktTime.remove(false);
+                    }
         		}, loop: false});
         	}
         }
@@ -197,11 +199,13 @@ class salle_15 extends Phaser.Scene {
         			this.getUp = 0;
         		}
 				this.recktTime = this.time.addEvent({ delay: 5000, callback: ()=>{ 
-        		    this.stun = 0;
-        		    canon.setAlpha(1);
-        			this.nbrCanon[1] = 1;
-        			this.compteCanon += 1;
-        			this.recktTime.remove(false);
+        		    if (this.stun == 1) {
+                        this.stun = 0;
+                        canon.setAlpha(1);
+                        this.nbrCanon[2] = 1;
+                        this.compteCanon += 1;
+                        this.recktTime.remove(false);
+                    }
         		}, loop: false});
         	}
         }
@@ -221,22 +225,26 @@ class salle_15 extends Phaser.Scene {
         			this.stun = 1;
         			this.getUp = 0;
         		}
-				this.recktTime = this.time.addEvent({ delay: 5000, callback: ()=>{ 
-        		    this.stun = 0;
-        		    canon.setAlpha(1);
-        			this.nbrCanon[2] = 1;
-        			this.compteCanon += 1;
-        			this.recktTime.remove(false);
+				this.recktTime = this.time.addEvent({ delay: 5000, callback: ()=>{
+                    if (this.stun == 1) {
+                        this.stun = 0;
+                        canon.setAlpha(1);
+                        this.nbrCanon[2] = 1;
+                        this.compteCanon += 1;
+                        this.recktTime.remove(false);
+                    }
         		}, loop: false});
         	}
         }
         this.count = 0;
         function atkBoss (teiwaz, boss) {
         	if (this.compteCanon > 0) {
-        		this.sound.play('boss_hit');
-        		this.stun = 0;
-            	this.delais -= 29;
-            	this.recktTime.remove(false);
+                if (this.stun == 1) {
+        		    this.sound.play('boss_hit');
+                    this.stun = 0;
+            	    this.delais -= 500;
+            	    this.recktTime.remove(false);
+                }
             }else{
             	this.sound.play('boss_dies');
             	this.recktTime.remove(false);
@@ -259,21 +267,21 @@ class salle_15 extends Phaser.Scene {
             var rand2 = Phaser.Math.RND.between(0,8);
             switch (rand) {
             	case 0 :
-            		if (rand2 == 8) {
+            		if (rand2 == 1) {
 						this.fireball.create(this.canon1.x, this.canon1.y, "boss_fire").setVelocity((this.player.x - this.canon1.x)/2, (this.player.y - this.canon1.y)/2).setScale(3.96,3.9);
             		} else{
             			this.fireballP.create(this.canon1.x, this.canon1.y, "boss_fireP").setVelocity((this.player.x - this.canon1.x)/2, (this.player.y - this.canon1.y)/2).setScale(3.96,3.9);
             		}
             		break;
             	case 1 :
-            		if (rand2 == 8) {
+            		if (rand2 == 1) {
 						this.fireball.create(this.canon2.x, this.canon2.y, "boss_fire").setVelocity((this.player.x - this.canon2.x)/2, (this.player.y - this.canon2.y)/2).setScale(3.96,3.9);
             		} else{
             			this.fireballP.create(this.canon2.x, this.canon2.y, "boss_fireP").setVelocity((this.player.x - this.canon2.x)/2, (this.player.y - this.canon2.y)/2).setScale(3.96,3.9);
             		}
             		break;
             	case 2 :
-            		if (rand2 == 8) {
+            		if (rand2 == 1) {
 						this.fireball.create(this.canon3.x, this.canon3.y, "boss_fire").setVelocity((this.player.x - this.canon3.x)/2, (this.player.y - this.canon3.y)/2).setScale(3.96,3.9);
             		} else{
             			this.fireballP.create(this.canon3.x, this.canon3.y, "boss_fireP").setVelocity((this.player.x - this.canon3.x)/2, (this.player.y - this.canon3.y)/2).setScale(3.96,3.9);
@@ -379,12 +387,12 @@ class salle_15 extends Phaser.Scene {
         if (hold == 1) {
             box.setPosition(this.player.x, this.player.y);
         }
-        console.log(this.death);
         if (this.death == 1) {
+            this.boss.disableBody(true, true);
         	if (this.blackScreen.alpha < 1) {
             	this.blackScreen.alpha += 0.01;
         	}else{
-        		this.add.text(250, 200, "YOU WIN !", { font: '64px Arial' });
+        		this.add.text(250, 200, "YOU WIN !", { font: '64px Arial' }).setDepth(11);
         	}
         }
 	}

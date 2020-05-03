@@ -26,10 +26,10 @@ var once2;
 var once3;
 var un;
 var count = 0;
-var jeraUnlock = 1;
+var jeraUnlock = 0;
 //doors
 var key = 0;
-var bossKey = 1;
+var bossKey = 0;
 var lock1 = 1;
 var lock2 = 1;
 var lock3 = 1;

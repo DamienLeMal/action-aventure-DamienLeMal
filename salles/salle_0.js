@@ -242,11 +242,6 @@ class salle_0 extends Phaser.Scene {
         lock1 = doorOpen(this.doors2_l,lock1, this);
         lock2 = doorOpen(this.doors1_l,lock2, this);
 
-
-        if (buttonPressed == 9) {
-            this.scene.start("salle9");
-        }
-
 		//Hero start position
         switch (lastRoom) {
             case -1 :
